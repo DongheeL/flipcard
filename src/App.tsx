@@ -3,30 +3,38 @@ import logo from './logo.svg';
 import './App.css';
 import { Button, ImageList, ImageListItem } from '@mui/material';
 import { stat } from 'fs';
+import zIndex from '@mui/material/styles/zIndex';
 
 
 function App() {
 
   const [level,setLevel] = useState<number>(1);
-  const [cards,setCard] = useState<number[]>([]);
+  const [cards,setCard] = useState<{no:number,isFlip:boolean}[]>([]);
 
   function getNewCards(number:number){
     setLevel(number);
     let total = Math.pow(2*number,2);
     console.log(total);
-    let icons:number[] = [];
+    let icons:{no:number,isFlip:boolean}[] = [];
+    let numbers:number[] = [];
     for(let i=0;i<total/2;i++){
-      let tmp = Math.floor(Math.random()*(9) + 1);  //난수 생성
-      if(icons.indexOf(tmp)>-1){
+      let tmp = Math.floor(Math.random()*(19) + 1);  //난수 생성
+      console.log(tmp);
+      if(numbers.indexOf(tmp)==-1){
         i--;
       }else{
-        icons.push(tmp);
-        icons.push(tmp);
+        icons.push({no:tmp,isFlip:true});
+        icons.push({no:tmp,isFlip:false});
+        numbers.push(tmp);
       }
     }
     icons.sort(()=>Math.random()-0.5);
     console.log(icons);
     setCard(icons);
+  }
+
+  function setFlip(index:number){
+    // cards.
   }
 
   return (
@@ -52,18 +60,28 @@ function App() {
       </div>
       {/* <img src="../icons/1.png"></img> */}
       <div className='panel'>
-        <ImageList cols={2*level} >
+        <ImageList cols={2*level} style={{ maxWidth:`${100}%`, height:'100%'}}>
           {cards.map((val,index)=>{
             return(
-              <ImageListItem key={(index+1)/(2*level)}>
-                <img  
-                  className='card'
-                  src={require(`./icons/${val}.png`)}
-                  // srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                  alt={val.toString()}
-                  loading="lazy"
-                  key={index}
-                />
+              <ImageListItem key={index} style={{ maxWidth:`${100}%`, height:'100%'}}  >
+                <div className='card' style={{ maxWidth:`${100}%`, height:'100%'}} onClick={()=>setFlip(index)}>
+                  {val.isFlip ?
+                    <div className= 'front'>
+                      <img  
+                        // className='back'
+                        style={{width:`${700/(2*level)*0.9}px`}}
+                        src={require(`./icons/${val.no}.png`)}
+                        alt={val.toString()}
+                        loading="lazy"
+                        key={index}
+                      />                    
+                    </div>
+                  : 
+                  <div className= 'back' style={{width:`${700/(2*level)*0.9}px`, height:`${700/(2*level)*0.9}px`}}>
+                    back
+                  </div>
+                }
+              </div>
               </ImageListItem>  
             )
           })}
