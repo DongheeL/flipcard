@@ -14,13 +14,12 @@ function App() {
   function getNewCards(number:number){
     setLevel(number);
     let total = Math.pow(2*number,2);
-    console.log(total);
     let icons:{no:number,isFlip:boolean}[] = [];
     let numbers:number[] = [];
+
     for(let i=0;i<total/2;i++){
       let tmp = Math.floor(Math.random()*(19) + 1);  //난수 생성
-      console.log(tmp);
-      if(numbers.indexOf(tmp)==-1){
+      if(numbers.indexOf(tmp)>-1){
         i--;
       }else{
         icons.push({no:tmp,isFlip:true});
