@@ -56,29 +56,48 @@
 
 .card {
   position: relative;
-  /* transition: transform 1s; */
-  display: block;
+  /* display: block; */
   transform-style: preserve-3d;
+  /* transition: transform 0.5s linear; */
   cursor: pointer;
 }
 
 .front, .back {
   position: absolute; 
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
-  backface-visibility: hidden;
+  align-items: center; */
+  backface-visibility: hidden; 
+  transition: transform 0.5s linear;
 }
 
 .front {
+  /* position: absolute; */
   border: 2px solid black;
   /* width: 200px; */
   transform: rotateY(0deg);
+  z-index: 10;
+}
+
+.front.isFlip {
+  border: 2px solid black;
+  /* background-color: #61dafb; */
+  transform: rotateY(180deg);
 }
 
 .back {
   /* width: 200px;
   height: 200px; */
+  position: absolute;
   border: 2px solid black;
-  transform: rotateY(180deg);
+  background-color: #61dafb;
+  transform: rotateY(-180deg);
+}
+
+.back.isFlip{
+  /* width: 200px;
+  height: 200px; */
+  border: 2px solid black;
+  background-color: #61dafb;
+  transform: rotateY(0deg);
 }
