@@ -27,6 +27,7 @@ function App() {
   const [selected, setSelected] = useState<cardSet[]>([]);
   const [clicked, setClicked] = useState<number|null>(null);
   const timer = useRef<any>(null);
+  const [count, setCount] = useState<number>(0);
 
   const flipTimer = () => {
     timer.current = setTimeout(() => {
@@ -38,15 +39,16 @@ function App() {
     console.log(timer.current);
   }
 
-  useEffect(() => {
-    console.log(cards)
-  }, [cards])
+  // useEffect(() => {
+  //   console.log(cards)
+  // }, [cards])
 
   useEffect(() => {
     console.log(level);
     setStarted(false);
     setSelected([]);
     setClicked(null);
+    setCount(0);
     setCard(getNewCards(level));
   }, [level])
 
@@ -148,7 +150,7 @@ function App() {
       <header className="App-header">
 
         <p>
-          {level}
+          Move:{count}
         </p>
         <a
           className="App-link"
@@ -175,14 +177,14 @@ function App() {
                 <div
                   className='card'
                   style={{ maxWidth: `${100}%`, height: '100%' }}
-                  onClick={() => { if (started && !val.matched) { setFlip(index) } }}
+                  onClick={() => { if (started && !val.matched) { setCount(count+1); setFlip(index); } }}
                 >
                   <div className={`front ${val.isFlip ? '' : 'isFlip'}`}>
                     <img
                       style={{ width: `${700 / (2 * level) * 0.9}px` }}
                       src={require(`./icons/${val.no}.png`)}
                       alt={val.toString()}
-                      loading="lazy"
+                      // loading="lazy"
                       key={index}
                     />
                   </div>
