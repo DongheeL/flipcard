@@ -28,6 +28,7 @@ function App() {
   const [clicked, setClicked] = useState<number|null>(null);
   const timer = useRef<any>(null);
   const [count, setCount] = useState<number>(0);
+  const [record, setRecord] = useState<number>(0);
 
   const flipTimer = () => {
     timer.current = setTimeout(() => {
@@ -152,14 +153,6 @@ function App() {
         <p>
           Move:{count}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {/* Learn React */}
-        </a>
       </header>
       <div>
         <Button variant="text" onClick={() => setLevel(1)}>Level 1</Button>
