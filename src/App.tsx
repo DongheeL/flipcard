@@ -116,13 +116,11 @@ function App() {
       }
     }
     icons.sort(() => Math.random() - 0.5);
-    console.log(icons)
 
     return icons;
   }
 
   const flipAll = () => {
-    console.log(cards);
     const newCard = [...cards];
     newCard.map((val) => {
       if(!val.matched){
@@ -137,10 +135,11 @@ function App() {
     //state 변경함수들은 state를 완전히 대체하는 것이기 때문에 완전히 새로운 배열을 넣어주어야 함.
     //따라서, 기존 배열을 수정해도 변경되지 않음.
     //기존 배열을 복사한 새로운 배열을 수정한 후 state변경 함수에 넣어주어야 새로운 배열로 적용됨.
+    clearTimeout(timer.current);
     const newCard = [...cards];
     newCard[index].isFlip = !newCard[index].isFlip;
     setCards(newCard);
-    clearTimeout(timer.current);
+    console.log(index)
     if (newCard[index].isFlip) {
       if(clicked==null){
         setClicked(index);
