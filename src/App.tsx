@@ -22,13 +22,15 @@ function App() {
   }
 
   const [level, setLevel] = useState<number>(1);
-  const [cards, setCard] = useState<card[]>([]);
+  const [cards, setCards] = useState<card[]>([]);
   const [started, setStarted] = useState<boolean>(false);
   const [selected, setSelected] = useState<cardSet[]>([]);
   const [clicked, setClicked] = useState<number|null>(null);
   const timer = useRef<any>(null);
   const [count, setCount] = useState<number>(0);
-  const [record, setRecord] = useState<number>(0);
+  const [record, setRecord] = useState<string>('00:00');
+  const [time, setTime] = useState<number>(0);
+  const recording = useRef<any>(null);
 
   const flipTimer = () => {
     timer.current = setTimeout(() => {
@@ -45,19 +47,21 @@ function App() {
   // }, [cards])
 
   useEffect(() => {
-    console.log(level);
     setStarted(false);
     setSelected([]);
     setClicked(null);
     setCount(0);
-    setCard(getNewCards(level));
+    setCards(getNewCards(level));
+    clearInterval(recording.current);
+    setTime(0);
+    setRecord('00:00');
   }, [level])
 
   useEffect(() => {
     console.log(started)
     if (started) {
       flipAll();
-      let timeout = setTimeout(() => { flipAll() }, 1000);
+      let timeout = setTimeout(() => { flipAll(); startRecord(); }, 1000);
     }
   }, [started])
 
@@ -70,7 +74,7 @@ function App() {
         const newCard = [...cards];
         newCard[lastSet.no1].matched = true;
         newCard[lastSet.no2].matched = true;
-        setCard(newCard);
+        setCards(newCard);
         console.log(selected.length)
       } else {
         let timer2 = setTimeout(() => { 
@@ -87,6 +91,14 @@ function App() {
       flipTimer();
     }
   }, [clicked])
+
+  useEffect(() => {
+    setRecord(`${parseInt((time/60).toString()).toString().padStart(2,'0')}:${(time%60).toString().padStart(2,'0')}`)
+  }, [time])
+
+  function startRecord(){
+     recording.current =  setInterval(()=>{setTime((prev)=>prev+1)}, 1000);
+  }
 
   const getNewCards = (number: number) => {
     let total = Math.pow(2 * number, 2);
@@ -117,7 +129,7 @@ function App() {
         val.isFlip = !val.isFlip
       }
     });
-    setCard(newCard);
+    setCards(newCard);
   }
 
   const setFlip = (index: number) => {
@@ -127,7 +139,7 @@ function App() {
     //기존 배열을 복사한 새로운 배열을 수정한 후 state변경 함수에 넣어주어야 새로운 배열로 적용됨.
     const newCard = [...cards];
     newCard[index].isFlip = !newCard[index].isFlip;
-    setCard(newCard);
+    setCards(newCard);
     clearTimeout(timer.current);
     if (newCard[index].isFlip) {
       if(clicked==null){
@@ -152,6 +164,9 @@ function App() {
 
         <p>
           Move:{count}
+        </p>
+        <p>
+          {record}
         </p>
       </header>
       <div>
