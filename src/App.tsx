@@ -59,6 +59,7 @@ function App() {
       flipAll();
       let timeout = setTimeout(() => { flipAll(); startRecord(); }, 1000);
     }
+    // return clearInterval(recording.current);
   }, [started])
 
   useEffect(() => {
@@ -66,7 +67,7 @@ function App() {
     clearTimeout(timer.current);
     let lastSet = selected[selected.length-1];
     if(selected.length>0){
-      if (cards[lastSet.no1].no==cards[lastSet.no2].no) {
+      if ((lastSet.no1!=lastSet.no2) && (cards[lastSet.no1].no==cards[lastSet.no2].no)) {
         // const newCard = [...cards];
         cards[lastSet.no1].matched = true;
         cards[lastSet.no2].matched = true;
@@ -82,6 +83,14 @@ function App() {
   }, [selected])
 
   useEffect(() => {
+    let isAllMatched = false;
+    if(time>0){
+      isAllMatched = cards.every((val)=>{return val.isFlip==true && val.matched==true})
+    }
+    if(isAllMatched){
+      alert('level clear!')
+      clearInterval(recording.current);
+    }
   }, [cards])
 
   useEffect(() => {
@@ -134,7 +143,7 @@ function App() {
     //state 변경함수들은 state를 완전히 대체하는 것이기 때문에 완전히 새로운 배열을 넣어주어야 함.
     //따라서, 기존 배열을 수정해도 변경되지 않음.
     //기존 배열을 복사한 새로운 배열을 수정한 후 state변경 함수에 넣어주어야 새로운 배열로 적용됨.
-    // clearTimeout(timer.current);
+    
     const newCard = [...cards];
     newCard[index].isFlip = !newCard[index].isFlip;
     setCards(newCard);
