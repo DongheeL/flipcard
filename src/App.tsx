@@ -32,19 +32,15 @@ function App() {
   const [time, setTime] = useState<number>(0);
   const recording = useRef<any>(null);
 
-  const flipTimer = () => {
+  const flipTimer = (index:number) => {
     timer.current = setTimeout(() => {
-      if(clicked!=null){
-        setFlip(clicked);
+      // if(clicked!=null){
+        setFlip(index);
         // setClicked(null);
-      }
+      // }
     }, 1000);
     console.log(timer.current);
   }
-
-  // useEffect(() => {
-  //   console.log(cards)
-  // }, [cards])
 
   useEffect(() => {
     setStarted(false);
@@ -67,14 +63,14 @@ function App() {
 
   useEffect(() => {
     console.log(selected);
-    // clearTimeout(timer.current);
+    clearTimeout(timer.current);
     let lastSet = selected[selected.length-1];
     if(selected.length>0){
       if (cards[lastSet.no1].no==cards[lastSet.no2].no) {
-        const newCard = [...cards];
-        newCard[lastSet.no1].matched = true;
-        newCard[lastSet.no2].matched = true;
-        setCards(newCard);
+        // const newCard = [...cards];
+        cards[lastSet.no1].matched = true;
+        cards[lastSet.no2].matched = true;
+        // setCards(newCard);
         console.log(selected.length)
       } else {
         let timer2 = setTimeout(() => { 
@@ -86,9 +82,12 @@ function App() {
   }, [selected])
 
   useEffect(() => {
+  }, [cards])
+
+  useEffect(() => {
     console.log(clicked);
     if(clicked!=null){
-      flipTimer();
+      flipTimer(clicked);
     }
   }, [clicked])
 
@@ -100,7 +99,7 @@ function App() {
      recording.current =  setInterval(()=>{setTime((prev)=>prev+1)}, 1000);
   }
 
-  const getNewCards = (number: number) => {
+  const getNewCards = (number: number) => { 
     let total = Math.pow(2 * number, 2);
     let icons: card[] = [];
     let numbers: number[] = [];
@@ -135,16 +134,16 @@ function App() {
     //state 변경함수들은 state를 완전히 대체하는 것이기 때문에 완전히 새로운 배열을 넣어주어야 함.
     //따라서, 기존 배열을 수정해도 변경되지 않음.
     //기존 배열을 복사한 새로운 배열을 수정한 후 state변경 함수에 넣어주어야 새로운 배열로 적용됨.
-    clearTimeout(timer.current);
+    // clearTimeout(timer.current);
     const newCard = [...cards];
     newCard[index].isFlip = !newCard[index].isFlip;
     setCards(newCard);
-    console.log(index)
+    console.log(index , newCard[index].isFlip)
     if (newCard[index].isFlip) {
       if(clicked==null){
         setClicked(index);
       }else{
-        const set:cardSet = {
+        const set:cardSet = { 
           no1:clicked,
           no2:index
         }
