@@ -88,7 +88,7 @@ function App() {
       isAllMatched = cards.every((val)=>{return val.isFlip==true && val.matched==true})
     }
     if(isAllMatched){
-      alert('level clear!')
+      let timeout = setTimeout(() => { alert('level clear!')}, 500);
       clearInterval(recording.current);
     }
   }, [cards])
@@ -207,7 +207,7 @@ function App() {
                     className={`back ${val.isFlip ? '' : 'isFlip'}`}
                     style={{ width: `${700 / (2 * level) * 0.9}px`, height: `${700 / (2 * level) * 0.9}px` }}
                   >
-                    back
+                    
                   </div>
                 </div>
               </ImageListItem>
