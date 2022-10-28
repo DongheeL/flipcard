@@ -39,7 +39,7 @@ function App() {
         // setClicked(null);
       // }
     }, 1000);
-    console.log(timer.current);
+    // console.log(timer.current);
   }
 
   useEffect(() => {
@@ -54,7 +54,7 @@ function App() {
   }, [level])
 
   useEffect(() => {
-    console.log(started)
+    // console.log(started)
     if (started) {
       flipAll();
       let timeout = setTimeout(() => { flipAll(); startRecord(); }, 1000);
@@ -63,7 +63,7 @@ function App() {
   }, [started])
 
   useEffect(() => {
-    console.log(selected);
+    // console.log(selected);
     clearTimeout(timer.current);
     let lastSet = selected[selected.length-1];
     if(selected.length>0){
@@ -72,7 +72,7 @@ function App() {
         cards[lastSet.no1].matched = true;
         cards[lastSet.no2].matched = true;
         // setCards(newCard);
-        console.log(selected.length)
+        // console.log(selected.length)
       } else {
         let timer2 = setTimeout(() => { 
           setFlip(lastSet.no1);
@@ -94,7 +94,7 @@ function App() {
   }, [cards])
 
   useEffect(() => {
-    console.log(clicked);
+    // console.log(clicked);
     if(clicked!=null){
       flipTimer(clicked);
     }
@@ -147,7 +147,7 @@ function App() {
     const newCard = [...cards];
     newCard[index].isFlip = !newCard[index].isFlip;
     setCards(newCard);
-    console.log(index , newCard[index].isFlip)
+    // console.log(index , newCard[index].isFlip)
     if (newCard[index].isFlip) {
       if(clicked==null){
         setClicked(index);
