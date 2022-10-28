@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/flipcard/static/css/main.536d2842.css",
+    "main.js": "/flipcard/static/js/main.0654b178.js",
+    "static/js/787.fdcf2462.chunk.js": "/flipcard/static/js/787.fdcf2462.chunk.js",
+    "static/media/17.png": "/flipcard/static/media/17.1b7eac04b81a7c55e70b.png",
+    "static/media/1.png": "/flipcard/static/media/1.ec2622e07a0054fdb1ca.png",
+    "static/media/2.png": "/flipcard/static/media/2.4ab9bdd7aa247ef3cdbe.png",
+    "static/media/7.png": "/flipcard/static/media/7.3207707c439e52573fa2.png",
+    "static/media/20.png": "/flipcard/static/media/20.d109b0008b83be88b166.png",
+    "static/media/6.png": "/flipcard/static/media/6.e6e5b233b8125422e625.png",
+    "static/media/16.png": "/flipcard/static/media/16.f395207895b60a5cbb3e.png",
+    "static/media/12.png": "/flipcard/static/media/12.6e41d900f717c13521f7.png",
+    "static/media/13.png": "/flipcard/static/media/13.e13fca7b1ddb4b5af49a.png",
+    "static/media/5.png": "/flipcard/static/media/5.9d7e1ee69715c0aeee0a.png",
+    "static/media/15.png": "/flipcard/static/media/15.cc19c160dee3865087bb.png",
+    "static/media/3.png": "/flipcard/static/media/3.444b7f021790b1947ae9.png",
+    "static/media/4.png": "/flipcard/static/media/4.59cf4f7b910942ebe0e2.png",
+    "static/media/18.png": "/flipcard/static/media/18.1a6603383c9c0eb9b86c.png",
+    "static/media/11.png": "/flipcard/static/media/11.8165e97d676b69078aa9.png",
+    "static/media/8.png": "/flipcard/static/media/8.d572130e69bb5d06a93a.png",
+    "static/media/10.png": "/flipcard/static/media/10.ca3ad33316eb707e836d.png",
+    "static/media/9.png": "/flipcard/static/media/9.cb7831835d56a75f756d.png",
+    "static/media/14.png": "/flipcard/static/media/14.44dc07a6d92724ca8055.png",
+    "static/media/19.png": "/flipcard/static/media/19.aa25a650e7869bde0228.png",
+    "index.html": "/flipcard/index.html",
+    "main.536d2842.css.map": "/flipcard/static/css/main.536d2842.css.map",
+    "main.0654b178.js.map": "/flipcard/static/js/main.0654b178.js.map",
+    "787.fdcf2462.chunk.js.map": "/flipcard/static/js/787.fdcf2462.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.536d2842.css",
+    "static/js/main.0654b178.js"
+  ]
+}
