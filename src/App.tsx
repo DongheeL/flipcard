@@ -24,6 +24,7 @@ function App() {
   const [level, setLevel] = useState<number>(1);
   const [cards, setCards] = useState<card[]>([]);
   const [started, setStarted] = useState<boolean>(false);
+  const [cardSet, setCardSet] = useState<cardSet|null>(null);
   const [selected, setSelected] = useState<cardSet[]>([]);
   const [clicked, setClicked] = useState<number|null>(null);
   const timer = useRef<any>(null);
@@ -62,25 +63,45 @@ function App() {
     // return clearInterval(recording.current);
   }, [started])
 
+  // useEffect(() => {
+  //   // console.log(selected);
+  //   clearTimeout(timer.current);
+  //   let lastSet = selected[selected.length-1];
+  //   if(selected.length>0){
+  //     if ((lastSet.no1!=lastSet.no2) && (cards[lastSet.no1].no==cards[lastSet.no2].no)) {
+  //       // const newCard = [...cards];
+  //       cards[lastSet.no1].matched = true;
+  //       cards[lastSet.no2].matched = true;
+  //       // setCards(newCard);
+  //       // console.log(selected.length)
+  //     } else if(lastSet.no1!=lastSet.no2){
+  //       let timer2 = setTimeout(() => { 
+  //         setFlip(lastSet.no1);
+  //         setFlip(lastSet.no2);
+  //       }, 1000);
+  //     }
+  //   }
+  // }, [selected])
+
   useEffect(() => {
     // console.log(selected);
     clearTimeout(timer.current);
-    let lastSet = selected[selected.length-1];
-    if(selected.length>0){
-      if ((lastSet.no1!=lastSet.no2) && (cards[lastSet.no1].no==cards[lastSet.no2].no)) {
+    // let lastSet = selected[selected.length-1];
+    if(cardSet!=null){
+      if ((cardSet.no1!=cardSet.no2) && (cards[cardSet.no1].no==cards[cardSet.no2].no)) {
         // const newCard = [...cards];
-        cards[lastSet.no1].matched = true;
-        cards[lastSet.no2].matched = true;
+        cards[cardSet.no1].matched = true;
+        cards[cardSet.no2].matched = true;
         // setCards(newCard);
         // console.log(selected.length)
-      } else {
+      } else if(cardSet.no1!=cardSet.no2){
         let timer2 = setTimeout(() => { 
-          setFlip(lastSet.no1);
-          setFlip(lastSet.no2);
-        }, 1000);
+          setFlip(cardSet.no1);
+          setFlip(cardSet.no2);
+        }, 500);
       }
     }
-  }, [selected])
+  }, [cardSet])
 
   useEffect(() => {
     let isAllMatched = false;
@@ -157,6 +178,7 @@ function App() {
           no2:index
         }
         const tmp = [...selected, set];
+        setCardSet(set);
         setSelected(tmp);
         setClicked(null);
       }
