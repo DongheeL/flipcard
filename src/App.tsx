@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Button, cardHeaderClasses, ImageList, ImageListItem } from '@mui/material';
 import { stat } from 'fs';
