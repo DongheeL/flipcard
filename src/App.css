@@ -1,6 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  max-height: 100%;
+}
+
 .App {
   text-align: center;
   justify-items: center;
+  /* height: max-content; */
 }
 
 .App-logo {
