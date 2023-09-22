@@ -203,23 +203,17 @@ function App() {
         <p>{record}</p>
       </header>
       <div>
-        <Button variant="text" onClick={() => setLevel(1)}>
-          Level 1
-        </Button>
-        <Button variant="text" onClick={() => setLevel(2)}>
-          Level 2
-        </Button>
-        <Button variant="text" onClick={() => setLevel(3)}>
-          Level 3
-        </Button>
-        <Button variant="contained" onClick={() => setStarted(true)}>
-          start
-        </Button>
+        {[1,2,3].map((level)=>{
+          return(
+            <button className={`w-20 rounded-xl font-semibold text-lg shadow-md mx-4 hover:bg-blue-400 hover:text-white border border-blue-400 text-blue-400`} onClick={()=>setLevel(level)}> Level {level}</button>
+          )
+        })}
+        <button className={`w-20 rounded-xl font-semibold text-lg mx-4 shadow-md bg-blue-400 text-white border hover:bg-red-400 `} onClick={() => setStarted(true)}> START {level}</button>
       </div>
 
-      <div className={`flex-1 grid grid-cols-${2 * level} gap-4`} >
+      <div className={`flex-1 w-2/3 mx-auto `} >
         
-        <ImagePanel cards={cards} />
+        <ImagePanel cards={cards} level={level} />
       </div>
     </div>
   );
